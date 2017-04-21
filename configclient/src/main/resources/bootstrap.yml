@@ -1,7 +1,27 @@
+#端口信息${server.port:8080}放在github上会报错，所以关于维持服务本身生命周期的参数放在本地
+server:
+  port: ${server.port:8080}
+
 spring:
   cloud:
     config:
       uri: http://localhost:7001
       name: configclient
-      profile: dev
+      profile: uat
+    bus:
+      trace:
+        enabled: true
+  config:
+    name: configclient
 
+#此参数放在github上变更不生效，变更后curl -d {} localhost:8080/refresh 还是可执行成功
+management:
+  security:
+    enabled: false
+
+# 配置在github.configclient-uat.yml
+#  rabbitmq: 
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
