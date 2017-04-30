@@ -1,0 +1,39 @@
+#端口信息${server.port:8080}放在github上会报错，所以关于维持服务本身生命周期的参数放在本地
+server:
+  #port: ${server.port:7010}
+  port: 8761
+
+spring:
+  application:
+    name: eurekaserver
+  cloud:
+    config:
+      uri: http://localhost:7001
+      name: eurekaserver
+      profile: dev
+    bus:
+      trace:
+        enabled: false
+
+#不注册，不获取
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    # eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/
+    # The service’s port is defaulted to the well-known 8761 if Cloud Foundry’s VCAP_APPLICATION_PORT environment variable isn’t available.
+    # How to change the port 8761 ?
+    service-url:
+      default-zone: ${vcap.services.ocr-eureka.credentials.uri:http://localhost:8761/eureka/}
+    
+#此参数放在github上变更不生效，变更后curl -d {} localhost:8080/refresh 还是可执行成功
+management:
+  security:
+    enabled: false
+
+# 配置在github.configclient-uat.yml
+#  rabbitmq: 
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest

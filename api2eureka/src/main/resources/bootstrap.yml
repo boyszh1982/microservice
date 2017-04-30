@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: api2eureka
+  cloud:
+    config:
+      uri: http://localhost:7001
+      #spring.cloud.config.name >>> eurekaserver-dev.properties
+      name: eurekaserver
+      profile: dev
+  config:
+    # is this a local eurekaserver.properties ?
+    name: api2eureka
+
+server:
+  port: 8010
+#  port: ${server.port:8010}
+
+#debug: true
+
+#不注册，不获取
+eureka:
+  client:
+    # eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/
+    # The service’s port is defaulted to the well-known 8761 if Cloud Foundry’s VCAP_APPLICATION_PORT environment variable isn’t available.
+    # How to change the port 8761 ?
+    service-url:
+      default-zone: ${vcap.services.ocr-eureka.credentials.uri:http://localhost:8761/eureka/}
+  
+
+#this config should in repo
+#eureka:
+#  client:
+#    service-url:
+#      default-zone: http://localhost:7010/eureka
