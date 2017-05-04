@@ -12,10 +12,10 @@ spring:
     name: api2eureka
 
 server:
-  port: 8010
-#  port: ${server.port:8010}
+#  port: 8010
+  port: ${server.port:8010}
 
-#debug: true
+debug: false
 
 #不注册，不获取
 eureka:

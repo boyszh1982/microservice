@@ -9,6 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class Api2eurekaApplication {
 
 	public static void main(String[] args) {
+		
 		SpringApplication.run(Api2eurekaApplication.class, args);
 	}
 }
